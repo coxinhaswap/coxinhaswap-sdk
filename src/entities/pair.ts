@@ -16,6 +16,8 @@ import {
   FEES_NUMERATOR,
   FEES_DENOMINATOR,
   ChainId,
+  FACTORY_ADDRESS_TEST,
+  INIT_CODE_HASH_TEST,
 } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
@@ -36,9 +38,9 @@ export class Pair {
         [tokens[0].address]: {
           ...PAIR_ADDRESS_CACHE?.[tokens[0].address],
           [tokens[1].address]: getCreate2Address(
-            FACTORY_ADDRESS,
+            tokenA.chainId === ChainId.MAINNET ? FACTORY_ADDRESS : FACTORY_ADDRESS_TEST,
             keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-            INIT_CODE_HASH
+            tokenA.chainId === ChainId.MAINNET ? INIT_CODE_HASH : INIT_CODE_HASH_TEST
           ),
         },
       }
