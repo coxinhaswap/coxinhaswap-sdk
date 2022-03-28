@@ -81,5 +81,21 @@ export const WETH = {
     'WBNB',
     'Wrapped BNB',
     'https://www.binance.org'
+  ),
+  [ChainId.CRONOS]: new Token(
+    ChainId.CRONOS,
+    '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23',
+    18,
+    'WCRO',
+    'Wrapped CRO',
+    'https://www.crypto.com'
+  ),
+  [ChainId.CRONOS_TESTNET]: new Token(
+    ChainId.CRONOS_TESTNET,
+    '0x5C7F8A570d578ED84E63fdFA7b1eE72dEae1AE23', // is wrong ok
+    18,
+    'WCRO',
+    'Wrapped CRO',
+    'https://www.crypto.com'
   )
 }
