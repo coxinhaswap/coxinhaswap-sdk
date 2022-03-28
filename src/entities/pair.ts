@@ -18,6 +18,8 @@ import {
   ChainId,
   FACTORY_ADDRESS_TEST,
   INIT_CODE_HASH_TEST,
+  FACTORY_ADDRESS_CRONOS,
+  INIT_CODE_HASH_CRONOS,
 } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
@@ -38,9 +40,9 @@ export class Pair {
         [tokens[0].address]: {
           ...PAIR_ADDRESS_CACHE?.[tokens[0].address],
           [tokens[1].address]: getCreate2Address(
-            tokenA.chainId === ChainId.MAINNET ? FACTORY_ADDRESS : FACTORY_ADDRESS_TEST,
+            tokenA.chainId === ChainId.MAINNET ? FACTORY_ADDRESS : tokenA.chainId === ChainId.CRONOS ? FACTORY_ADDRESS_CRONOS : FACTORY_ADDRESS_TEST,
             keccak256(['bytes'], [pack(['address', 'address'], [tokens[0].address, tokens[1].address])]),
-            tokenA.chainId === ChainId.MAINNET ? INIT_CODE_HASH : INIT_CODE_HASH_TEST
+            tokenA.chainId === ChainId.MAINNET ? INIT_CODE_HASH : tokenA.chainId === ChainId.CRONOS ?  INIT_CODE_HASH_CRONOS : INIT_CODE_HASH_TEST
           ),
         },
       }
